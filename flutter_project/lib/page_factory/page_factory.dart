@@ -23,20 +23,15 @@ class FactoryPage {
         child: const StacPages(),
       );
 
-
   Widget makeMenu() => ChangeNotifierProvider(
         create: (_) => MenuController(),
         child: const MenuPage(),
       );
 
-  Widget makeCart() => ChangeNotifierProvider(
-        create: (_) => CartController(),
-        child: const CartPage(),
-      );
+  Widget makeCart() => const CartPage();
 
   Widget makeHome() => ChangeNotifierProvider(
         create: (_) => HomeController(),
         child: const HomePage(),
       );
-
 }

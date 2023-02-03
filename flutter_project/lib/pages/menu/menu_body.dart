@@ -13,7 +13,7 @@ class MenuBody extends StatelessWidget {
         child: ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: controller.productData?.length,
+          itemCount: controller.productData?.length ?? 0,
           itemBuilder: (_, int index) => _ItemBuilder(
             item: controller.productData![index],
           ),
@@ -22,46 +22,75 @@ class MenuBody extends StatelessWidget {
     );
   }
 }
+
 class _ItemBuilder extends StatelessWidget {
   final ProductData item;
   const _ItemBuilder({required this.item});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 18),
-      padding: const EdgeInsets.all(8),
-      color: Colors.teal,
+    return Card(
+      clipBehavior: Clip.hardEdge,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      color: Colors.teal[100],
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InkWell(
-            onTap: () {},
-            child: Icon(Icons.add),
-          ),
-          InkWell(
-            onTap: () => {},
-            child: Container(
-              color: Colors.teal[200],
-              child: Image(
-                fit: BoxFit.cover,
-                width: 100,
-                image: NetworkImage(
-                  item.img!,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 18),
-          Expanded(
-            child: Column(
-              children: [
-                Text(' ${item.name}'),
-                Text(' ${item.price}\$'),
-              ],
-            ),
-          ),
-
+          _ItemImg(img: item.img!),
+          _ItemDescription(description: item.description!),
         ],
       ),
     );
+  }
+}
+
+class _ItemImg extends StatelessWidget {
+  final String img;
+  const _ItemImg({required this.img});
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Image(
+        fit: BoxFit.cover,
+        image: NetworkImage(img),
+      ),
+    );
+  }
+}
+
+class _ItemDescription extends StatelessWidget {
+  final String description;
+  const _ItemDescription({required this.description});
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 2,
+      child: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10.0, left: 10, right: 10),
+              child: Text(
+                description,
+                maxLines: 8,
+                overflow: TextOverflow.fade,
+              ),
+            ),
+          ),
+          _ItemPay(),
+        ],
+      ),
+    );
+  }
+}
+
+class _ItemPay extends StatelessWidget {
+  const _ItemPay({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(onPressed: () {}, child: Text('pay'));
   }
 }

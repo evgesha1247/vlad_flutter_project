@@ -11,6 +11,7 @@ class MainNavigation {
   Map<String, WidgetBuilder> get routes => <String, WidgetBuilder>{
         initialRoute: (_) => FactoryPage().mainPage(),
       };
+
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(
       builder: (context) => Scaffold(
