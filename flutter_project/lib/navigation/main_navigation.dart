@@ -14,7 +14,7 @@ class MainNavigation {
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(
       builder: (context) => Scaffold(
-        body: Center(child: Text('ошибка навигации ! , ${settings.name}')),
+        body: Center(child: Text('404 / , ${settings.name}')),
       ),
     );
   }
