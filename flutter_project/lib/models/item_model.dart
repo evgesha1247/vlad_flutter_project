@@ -76,14 +76,16 @@ class ProductData {
   String? img;
   String? name;
   int? price;
+  int? id;
 
-  ProductData({this.description, this.img, this.name, this.price});
+  ProductData({this.description, this.img, this.name, this.price, this.id});
 
   ProductData.fromJson(Map<String, dynamic> json) {
     description = json['description'];
     img = json['img'];
     name = json['name'];
-    price = json['price'];
+    price = json['prise'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -91,7 +93,8 @@ class ProductData {
     data['description'] = description;
     data['img'] = img;
     data['name'] = name;
-    data['price'] = price;
+    data['prise'] = price;
+    data['id'] = id;
     return data;
   }
 }

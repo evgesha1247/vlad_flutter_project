@@ -30,7 +30,7 @@ class _ItemBuild extends StatelessWidget {
       Icons.bakery_dining_outlined,
       Icons.wine_bar_outlined
     ];
-    final controller = context.watch<MenuController>();
+    final controller = context.watch<MenuControll>();
     final title = CategoryPage.values[index].name.toString();
     final bool select = title == controller.categoryPageName.name;
     return InkWell(

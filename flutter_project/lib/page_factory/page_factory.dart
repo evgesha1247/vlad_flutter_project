@@ -24,7 +24,7 @@ class FactoryPage {
       );
 
   Widget makeMenu() => ChangeNotifierProvider(
-        create: (_) => MenuController(),
+        create: (_) => MenuControll(),
         child: const MenuPage(),
       );
 

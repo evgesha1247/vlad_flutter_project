@@ -7,15 +7,14 @@ import '../../../models/item_model.dart';
 
 enum CategoryPage { burgers, drinks, snacks }
 
-class MenuController extends ChangeNotifier {
+class MenuControll extends ChangeNotifier {
   late FirebaseFirestore db;
-  MenuController() {
+  MenuControll() {
     _init();
   }
   List<ProductData>? _productData = [];
   List<ProductData>? get productData => _productData;
   CategoryPage categoryPageName = CategoryPage.burgers;
-
 
   late SharedPreferences _prefs;
   late Map<String, dynamic> _productMap;
@@ -41,6 +40,8 @@ class MenuController extends ChangeNotifier {
         break;
       default:
         _productData = [];
+
+        print(_productData);
     }
 
     notifyListeners();

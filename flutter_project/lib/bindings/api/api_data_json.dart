@@ -1,8 +1,8 @@
-import 'dart:convert';
+// ignore_for_file: constant_identifier_names
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
-import 'package:flutter_application_1/models/item_model.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../firebase_options.dart';

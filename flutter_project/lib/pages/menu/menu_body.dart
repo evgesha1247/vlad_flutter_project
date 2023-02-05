@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/models/item_model.dart';
 import 'package:provider/provider.dart';
-import '../../models/item_model.dart';
+import '../../models/cart_model.dart';
+import '../cart/cart_controlle/cart_controller.dart';
 import 'menu_controller/menu_controller.dart';
 
 class MenuBody extends StatelessWidget {
   const MenuBody({super.key});
   @override
   Widget build(BuildContext context) {
-    final controller = context.watch<MenuController>();
+    final controller = context.watch<MenuControll>();
     return Expanded(
       child: SingleChildScrollView(
         child: ListView.builder(
@@ -28,19 +30,41 @@ class _ItemBuilder extends StatelessWidget {
   const _ItemBuilder({required this.item});
   @override
   Widget build(BuildContext context) {
-    return Card(
-      clipBehavior: Clip.hardEdge,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      color: Colors.teal[100],
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _ItemImg(img: item.img!),
-          _ItemDescription(description: item.description!),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: Card(
+        clipBehavior: Clip.hardEdge,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        color: Colors.teal[100],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _ItemImg(img: item.img!),
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 10.0, left: 10, right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _ItemTitle(name: item.name ?? ''),
+                        const SizedBox(height: 9),
+                        _ItemDescription(description: item.description ?? ''),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            UpDataItem(item: item),
+          ],
+        ),
       ),
     );
   }
@@ -60,37 +84,52 @@ class _ItemImg extends StatelessWidget {
   }
 }
 
+class _ItemTitle extends StatelessWidget {
+  final String name;
+  const _ItemTitle({required this.name});
+  @override
+  Widget build(BuildContext context) {
+    return Text(name);
+  }
+}
+
 class _ItemDescription extends StatelessWidget {
   final String description;
   const _ItemDescription({required this.description});
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10.0, left: 10, right: 10),
-              child: Text(
-                description,
-                maxLines: 8,
-                overflow: TextOverflow.fade,
-              ),
-            ),
-          ),
-          _ItemPay(),
-        ],
-      ),
+    return Text(
+      description,
+      maxLines: 4,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
 
-class _ItemPay extends StatelessWidget {
-  const _ItemPay({super.key});
+class UpDataItem extends StatelessWidget {
+  final ProductData item;
 
+  const UpDataItem({required this.item});
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: () {}, child: Text('pay'));
+    final cardController = context.read<CartController>();
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: () {
+            cardController.upDataCountProductInCart(false, item);
+          },
+          child: Icon(
+            Icons.remove,
+          ),
+        ),
+        GestureDetector(
+          onTap: () => cardController.upDataCountProductInCart(true, item),
+          child: Icon(
+            Icons.add,
+          ),
+        ),
+      ],
+    );
   }
 }
