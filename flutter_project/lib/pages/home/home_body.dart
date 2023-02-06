@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../widgets/my_text_field/my_text_field.dart';
 import 'home_controller/home_controller.dart';
 
 class HomeBody extends StatelessWidget {
@@ -27,11 +28,8 @@ class _Delivery extends StatelessWidget {
       child: Column(
         children: const [
           Text('_Delivery'),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'adress',
-            ),
-          ),
+          MyTextField(hintText: 'adress'),
+
         ],
       ),
     );

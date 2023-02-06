@@ -4,6 +4,8 @@ import 'package:flutter_application_1/pages/stac_page/stac_pages.dart';
 import 'package:flutter_application_1/pages/stac_page/stac_page_controller.dart/pages_controller.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/auth/auth.dart';
+import '../pages/auth/controller/auth_controller.dart';
 import '../pages/cart/cart.dart';
 import '../pages/cart/cart_controlle/cart_controller.dart';
 import '../pages/home/home.dart';
@@ -33,5 +35,10 @@ class FactoryPage {
   Widget makeHome() => ChangeNotifierProvider(
         create: (_) => HomeController(),
         child: const HomePage(),
+      );
+
+  Widget makeAuth() => ChangeNotifierProvider(
+        create: (_) => AuthController(),
+        child: const AuthPage(),
       );
 }

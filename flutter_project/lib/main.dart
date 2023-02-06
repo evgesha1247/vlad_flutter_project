@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     final mainNavigation = MainNavigation();
     return MaterialApp(
       routes: mainNavigation.routes,
-      initialRoute: mainNavigation.initialRoute,
+      initialRoute: mainNavigation.auth,
       debugShowCheckedModeBanner: false,
     );
   }
