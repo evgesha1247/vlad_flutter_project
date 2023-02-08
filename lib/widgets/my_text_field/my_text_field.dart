@@ -9,16 +9,21 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 18,
+
       child: TextField(
+        minLines: 1,
+        maxLines: 10,
         controller: controller,
         scrollPadding: EdgeInsets.zero,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
+          isDense: true,
           hintText: hintText,
           hintStyle: const TextStyle(fontSize: 18),
-          prefixIcon: Icon(icon, size: 18),
+          prefixIcon: icon != null ? Icon(icon, size: 18) : null,
+          border: const OutlineInputBorder(),
+
           floatingLabelBehavior: FloatingLabelBehavior.always,
         ),
       ),

@@ -8,7 +8,6 @@ class AuthController extends ChangeNotifier {
         return TextEditingController(text: s);
       }).toList();
 
-  List<TextEditingController> textFieldControlls = <TextEditingController>[];
   Future<void> showMainPage(
       List<TextEditingController> data, BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
@@ -17,7 +16,6 @@ class AuthController extends ChangeNotifier {
       profileData.add(element.text);
     }
     await prefs.setStringList('profileData', profileData);
-
-     Navigator.of(context).pushNamed(MainNavigation().initialRoute);
+    Navigator.of(context).pushNamed(MainNavigation().initialRoute);
   }
 }

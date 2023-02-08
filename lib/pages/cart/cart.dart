@@ -5,6 +5,7 @@ import 'package:flutter_application_1/pages/menu/menu_controller/menu_controller
 import 'package:provider/provider.dart';
 
 import '../../models/item_model.dart';
+import '../../widgets/button/my_button.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
@@ -30,12 +31,9 @@ class CartPage extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
-              decoration: BoxDecoration(border: Border.all()),
-              child: const Text('Pay')),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: MyButton(text: 'Купить'),
         ),
       ],
     );
