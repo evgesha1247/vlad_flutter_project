@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../widgets/my_text_field/my_text_field.dart';
 
-const titles = <String>['adress', 'phone', 'ph'];
+const titles = <String>['name' ,'adress', 'phone', 'ph'];
 const icons = <IconData>[Icons.home, Icons.phone];
 
 class AuthPage extends StatelessWidget {
@@ -31,10 +31,9 @@ class AuthPage extends StatelessWidget {
             ),
             Center(
               child: InkWell(
-                onTap: () {
-                  textEdi.forEach((element) => print(element.text));
-                  //  controller.showMainPage(context);
-                },
+                onTap: () =>
+                   controller.showMainPage(textEdi , context),
+
                 child: const Text('data'),
               ),
             ),

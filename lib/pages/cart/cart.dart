@@ -62,7 +62,7 @@ class _ItemBuilder extends StatelessWidget {
                 children: [
                   InkWell(
                       onTap: () => controller.upDataCountProductInCart(
-                          false, item.product),
+                          true, item.product),
                       child: const Icon(Icons.add)),
                   Text(item.count.toString()),
                   InkWell(

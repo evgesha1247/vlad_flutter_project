@@ -18,6 +18,7 @@ class CartController extends ChangeNotifier {
     notifyListeners();
   }
 
+
   void _addProductToCart(ProductData product) {
     addItem(product, _countForAdding);
     _countForAdding = 0;
@@ -25,12 +26,12 @@ class CartController extends ChangeNotifier {
     notifyListeners();
   }
 
-  int getCountProduct(ProductData product) {
+  String getCountProduct(ProductData product) {
     return existInCart(product)
         ? _cardList.values
             .firstWhere((element) => element.id == product.id)
-            .count
-        : 0;
+            .count.toString()
+        : '0';
   }
 
   int _checkCount(int countProduct) {

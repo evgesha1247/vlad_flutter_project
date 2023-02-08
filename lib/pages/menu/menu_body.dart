@@ -17,7 +17,8 @@ class MenuBody extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: controller.productData?.length ?? 0,
           itemBuilder: (_, int index) => _ItemBuilder(
-            item: controller.productData![index],
+
+            index : index ,
           ),
         ),
       ),
@@ -26,10 +27,11 @@ class MenuBody extends StatelessWidget {
 }
 
 class _ItemBuilder extends StatelessWidget {
-  final ProductData item;
-  const _ItemBuilder({required this.item});
+  final int index;
+  const _ItemBuilder({required this.index});
   @override
   Widget build(BuildContext context) {
+        final controller = context.watch<MenuControll>();
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: Card(
@@ -44,7 +46,7 @@ class _ItemBuilder extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _ItemImg(img: item.img!),
+                _ItemImg(img: controller.productData![index].img!),
                 Expanded(
                   flex: 2,
                   child: Padding(
@@ -53,16 +55,16 @@ class _ItemBuilder extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _ItemTitle(name: item.name ?? ''),
+                        _ItemTitle(name: controller.productData![index].name ?? ''),
                         const SizedBox(height: 9),
-                        _ItemDescription(description: item.description ?? ''),
+                        _ItemDescription(description: controller.productData![index].description ?? ''),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
-            UpDataItem(item: item),
+            _UpDataItem(index: index, item: controller.productData![index],),
           ],
         ),
       ),
@@ -106,30 +108,34 @@ class _ItemDescription extends StatelessWidget {
   }
 }
 
-class UpDataItem extends StatelessWidget {
-  final ProductData item;
-
-  const UpDataItem({required this.item});
+class _UpDataItem extends StatelessWidget {
+  final int index;
+  final ProductData item ;
+  const _UpDataItem({ required this.index, required this.item});
   @override
   Widget build(BuildContext context) {
-    final cardController = context.read<CartController>();
-    return Row(
+    final cardController = context.watch<CartController>();
+    return
+
+    Row(
       children: [
         GestureDetector(
           onTap: () {
             cardController.upDataCountProductInCart(false, item);
           },
-          child: Icon(
+          child: const  Icon(
             Icons.remove,
           ),
         ),
+       Text(cardController.getCountProduct(item)) ,
         GestureDetector(
-          onTap: () => cardController.upDataCountProductInCart(true, item),
-          child: Icon(
+          onTap: () => cardController.upDataCountProductInCart(true,  item),
+          child: const Icon(
             Icons.add,
           ),
         ),
       ],
     );
+
   }
 }
