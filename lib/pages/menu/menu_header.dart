@@ -8,9 +8,8 @@ class MenuHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Wrap(
-        spacing: 10.0,
-        direction: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
           CategoryPage.values.length,
           (index) => _ItemBuild(index: index),
@@ -23,51 +22,39 @@ class MenuHeader extends StatelessWidget {
 class _ItemBuild extends StatelessWidget {
   final int index;
   const _ItemBuild({required this.index});
-
   @override
   Widget build(BuildContext context) {
-    List icon = <IconData>[
-      Icons.bakery_dining_outlined,
-      Icons.wine_bar_outlined
-    ];
+    List icon = <IconData>[Icons.bakery_dining, Icons.wine_bar];
     final controller = context.watch<MenuControll>();
     final title = CategoryPage.values[index].name.toString();
-    final bool select = title == controller.categoryPageName.name;
+    bool select = title == controller.categoryPageName.name;
     return InkWell(
       onTap: () => controller.setScreen(index),
       child: AnimatedContainer(
-        height: 45,
-        constraints: const BoxConstraints(maxWidth: 100, minWidth: 70),
         duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(select ? 15 : 10),
-            color: select ? Colors.teal : Colors.teal[200]),
+          border: Border.all(
+            width: .2,
+            color: Colors.black.withOpacity(!select ? 0 : 1),
+          ),
+          color: Colors.black.withOpacity(!select ? 0.1 : 0),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            !select
-                ? Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.black54,
-                      fontSize: 14,
-                    ),
-                  )
-                : index <= icon.length - 1
-                    ? Row(
-                        children: [
-                          Icon(icon[index]),
-                          const SizedBox(width: 10),
-                          Text(
-                            title,
-                            style: const TextStyle(
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Text(title),
+if (select && index <= icon.length - 1)
+              Row(children: [
+                Icon(icon[index], size: 18),
+                const SizedBox(width: 9)
+              ]),
+            Text(
+              title,
+              style: TextStyle(
+                color: Colors.black.withOpacity(!select ? 0.6 : 1),
+                fontSize: 16,
+              ),
+            ),
           ],
         ),
       ),

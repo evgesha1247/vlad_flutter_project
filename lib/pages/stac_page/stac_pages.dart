@@ -11,15 +11,18 @@ class StacPages extends StatelessWidget {
     final factor = FactoryPage();
     return Scaffold(
       bottomNavigationBar: const _Buttom(),
-      body: IndexedStack(
-        index: controller.currentIndexPage,
-        children: [
-          factor.makeHome(),
-          factor.makeMenu(),
-          factor.makeCart(),
-factor.makeProfile() ,
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: IndexedStack(
+          index: controller.currentIndexPage,
+          children: [
+            factor.makeHome(),
+            factor.makeMenu(),
+            factor.makeCart(),
+            factor.makeProfile(),
 
-        ],
+          ],
+        ),
       ),
     );
   }

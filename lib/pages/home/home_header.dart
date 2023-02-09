@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'home_controller/home_controller.dart';
+const List _listTextBtn = ['доставка', 'самовывоз'];
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
   @override
   Widget build(BuildContext context) {
-    final controller = context.read<HomeController>();
-    return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(10),
-      color: Colors.teal[200],
-      child: Row(
-        children: List.generate(
-          controller.listTextBtn.length,
-          (index) => _ButtonHeader(
-            index: index,
-          ),
+    return Row(
+      children: List.generate(
+        _listTextBtn.length,
+        (index) => _ButtonHeader(
+          index: index,
         ),
       ),
     );
@@ -30,16 +24,25 @@ class _ButtonHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<HomeController>();
+    bool select = controller.currentIndexPage != index;
     return Expanded(
       child: InkWell(
         onTap: () => controller.setScreen(index),
-        child: Container(
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.all(10),
-            color: index == controller.currentIndexPage
-                ? Colors.teal
-                : Colors.teal[100],
-            child: Center(child: Text(controller.listTextBtn[index]))),
+        child: AnimatedContainer(
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: .2,
+              color: Colors.black.withOpacity(select ? 0 : 1),
+            ),
+            color: Colors.black.withOpacity(select ? 0.2 : 0),
+          ),
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.ease,
+          child: Center(
+            child: Text(_listTextBtn[index]),
+          ),
+        ),
       ),
     );
   }

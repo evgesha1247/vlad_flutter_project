@@ -27,7 +27,7 @@
   "editor.unicodeHighlight.ambiguousCharacters": false,
   "editor.bracketPairColorization.enabled": false,
   "editor.cursorBlinking": "smooth",
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.cursorWidth": 2,
   "editor.cursorStyle": "line",
   "editor.guides.bracketPairsHorizontal": true,

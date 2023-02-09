@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileController extends ChangeNotifier {
 List<String>? data = <String>[];
-  String? imgUrl = null;
+  String? imgUrl;
   final imgController = TextEditingController();
 
   late final SharedPreferences story;

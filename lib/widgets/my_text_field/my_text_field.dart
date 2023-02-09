@@ -9,18 +9,16 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-
       child: TextField(
         minLines: 1,
         maxLines: 10,
         controller: controller,
-        scrollPadding: EdgeInsets.zero,
+        scrollPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
           isDense: true,
+          fillColor: Colors.white,
           hintText: hintText,
-          hintStyle: const TextStyle(fontSize: 18),
           prefixIcon: icon != null ? Icon(icon, size: 18) : null,
           border: const OutlineInputBorder(),
 

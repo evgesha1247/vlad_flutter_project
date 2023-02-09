@@ -10,6 +10,7 @@ class MenuPage extends StatelessWidget {
     return Column(
       children: const [
         MenuHeader(),
+        SizedBox(height: 18),
         MenuBody(),
       ],
     );

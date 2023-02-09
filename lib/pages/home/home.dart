@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
     return Column(
       children: const [
         HomeHeader(),
+        SizedBox(height: 18),
         HomeBody(),
       ],
     );
